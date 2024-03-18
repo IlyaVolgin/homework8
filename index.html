@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dom-Piva</title>
+  <style>
+    /* Add your CSS styles here */
+  </style>
+</head>
+<body>
+  <!-- Add your HTML content here -->
+
+  <!-- Add a button to create a blog -->
+  <button><a href="/article/">Create Blog</a></button>
+
+  <!-- Add a header for the blog section -->
+  <h1 class="blog-header">BLOG</h1>
+
+  <!-- Display the number of articles -->
+  <p class="article-count">Number of articles: <span id="article-count">0</span></p>
+
+  <!-- Add a container for the blog posts -->
+  <div id="blog-posts">
+    <!-- Blog posts will be inserted here by JavaScript -->
+  </div>
+
+  <!-- Add JavaScript code to fetch and display the blog posts -->
+  <script>
+    // Fetch the blog posts from your server or database
+    fetch('/api/blog-posts')
+      .then(response => response.json())
+      .then(data => {
+        // Update the article count
+        document.getElementById('article-count').textContent = data.length;
+
+        // Create an HTML string for the blog posts
+        let blogPostsHtml = '';
+        data.forEach(post => {
+          blogPostsHtml += `
+            <div class="blog-post">
+              <h2>${post.title}</h2>
+              <p>${post.content}</p>
+            </div>
+          `;
+        });
+
+        // Insert the blog posts into the blog-posts container
+        document.getElementById('blog-posts').innerHTML = blogPostsHtml;
+      })
+      .catch(error => {
+        console.error('Error fetching blog posts:', error);
+      });
+  </script>
+</body>
+</html>
