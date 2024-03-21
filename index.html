@@ -1,0 +1,177 @@
+
+<!doctype html>
+<html lang="en" data-theme="dracula">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dom-Piva</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+
+    
+
+
+    <div class="navbar bg-base-300">
+    <div class="container mx-auto">
+    <div class="navbar-start">
+      <a class="btn btn-ghost text-xl" href="/">Dom-Piva</a>
+    </div>
+    <div class="navbar-center flex">
+      <ul class="menu menu-horizontal px-1">
+        <li><a href="/lol/">lol</a></li>
+        <li><a href="/blog/">Blog</a></li>
+      </ul>
+    </div>
+    <div class="navbar-end flex">
+      
+
+      
+        <a href="/members/login/" class="btn btn-ghost">Login</a>
+        <a href="/members/signup/" class="btn btn-ghost">Signup</a>
+      
+    </div>
+    </div>
+  </div>
+
+
+    
+
+
+    <div class="container mx-auto">
+    
+    <div class="my-4 rounded-lg bg-base-300 p-9 ">
+    <h1 class = "text-3xl font-bold mb-4">Blog</h1>
+    <a onclick="my_modal_4.showModal()" class="btn btn-primary">Create Post</a>
+    <div class="my-4 border-b-2 border-gray-300 w-full"></div>
+    <div class="grid grid-cols-3 gap-7">
+        
+    
+          <div class="card w-100 bg-base-200 shadow-xl hover:bg-base-100 transition-all duration-300 hover:shadow-2xl hover:scale-105">   
+    <a href="/blog/post/47/">
+          <figure>
+            <img src="
+          /media/CACHE/images/posts/Blog-Sybersecurity_uGzbIHp/eabb899f2fa7302914c02a9445e6e58e.jpg        
+           " alt="Shoes" class="w-full" /></figure>
+
+      
+      <div class="card-body">
+        <h2 class="card-title">Супер пост</h2>
+      </a>
+        <div class="card-actions justify-end">
+          <button id="like_47" onclick='like(47)'  class="btn btn-square  text-white text-lg"><i class="fa-solid fa-heart text-white"></i>0</button>
+        </div>
+      </div>
+    </a>
+</div>
+
+
+        
+    
+          <div class="card w-100 bg-base-200 shadow-xl hover:bg-base-100 transition-all duration-300 hover:shadow-2xl hover:scale-105">   
+    <a href="/blog/post/46/">
+          <figure>
+            <img src="
+          /media/CACHE/images/posts/Blog-Sybersecurity_IBYAaOC/2a236f1f3f0b29a46427afc265867ae2.jpg        
+           " alt="Shoes" class="w-full" /></figure>
+
+      
+      <div class="card-body">
+        <h2 class="card-title">Супер пост</h2>
+      </a>
+        <div class="card-actions justify-end">
+          <button id="like_46" onclick='like(46)'  class="btn btn-square  text-white text-lg"><i class="fa-solid fa-heart text-white"></i>1</button>
+        </div>
+      </div>
+    </a>
+</div>
+
+
+        
+    </div>
+    <div class="join align-center justify-center flex my-4">
+      
+
+      <button class="join-item btn btn-primary">Page 1</button>
+
+      
+    </div>
+  </div>
+
+
+
+
+  <dialog id="my_modal_4" class="modal">
+    <div class="modal-box w-11/12 max-w-5xl">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <h3 class="font-bold text-lg mb-4">Create Post</h3>
+      <form action="/blog/create/" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="csrfmiddlewaretoken" value="owjwDvXByPwMoOSux1gLL0hkvTAHVQRgEA8TMMqk4f68jVxhB2uDCYHF6BLYYgiU">
+        <div class="grid grid-cols-1 gap-6">
+        
+          <div class="form-control">
+              <label class="label">
+                <span class="label-text">Title</span>
+              </label>
+           
+            <input type="text" name="title" class="input input-bordered" placeholder="Title">
+            
+          </div>
+        
+          <div class="form-control">
+              <label class="label">
+                <span class="label-text">Content</span>
+              </label>
+           
+            <textarea class="textarea textarea-bordered" name="content" placeholder="Content" rows="5"></textarea>
+            
+          </div>
+        
+          <div class="form-control">
+              <label class="label">
+                <span class="label-text">Image</span>
+              </label>
+           
+            <input type="file" name="image" class="file-input file-input-bordered file-input-accent  w-full max-w-xs" placeholder="Image">
+            
+          </div>
+        
+        <button class="btn btn-primary">Create</button>
+      </div>
+        
+      </form>
+    </div>
+  </dialog>
+
+
+
+<script>
+  function like(id) {
+    fetch(`like/${id}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if(data.user_like){
+        document.getElementById(`like_${id}`).innerHTML = `<i class="fa fa-heart text-red-500"></i> ${data.like_count}`;
+        }else{
+          document.getElementById(`like_${id}`).innerHTML = `<i class="fa fa-heart text-white"></i> ${data.like_count}`;
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+          // Redirect to the login page
+        window.location.href = "/members/login/";
+      });
+  }
+
+
+</script>
+
+    </div>
+  </body>
+</html>
